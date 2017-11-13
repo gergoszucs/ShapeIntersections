@@ -111,14 +111,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="circle.cpp" />
+    <ClCompile Include="convex_hull.cpp" />
     <ClCompile Include="line.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="shape_reader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
+    <ClInclude Include="convex_hull.h" />
     <ClInclude Include="line.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="shape.h" />
+    <ClInclude Include="shape_reader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

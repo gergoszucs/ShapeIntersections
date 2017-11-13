@@ -24,6 +24,12 @@
     <ClCompile Include="circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="convex_hull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shape_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="line.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="convex_hull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

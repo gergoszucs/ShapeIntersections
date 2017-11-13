@@ -1,52 +1,38 @@
+﻿/**
+* Test the different type of shape intersections, convex hull generation and area calculation.
+*/
+
 #include <iostream>
-#include <list>
 #include <algorithm>
 #include <iomanip>
+#include "shape_reader.h"
+#include "convex_hull.h"
 #include "line.h"
 #include "circle.h"
 
-#include <fstream>
-
 using namespace Intersections;
 
-void check_for_intersections(const Shape* line, const Shape* other, std::list<Point<double>>& intersections);
+int main() 
+{
+	// Initialize a new shape reader and retrieve the calculated intersection points
+	ShapeReader reader;
+	std::vector<Point<float>> intersections = reader.get_intersections();
+	
+	std::cout << std::fixed << std::setprecision(4) << intersections.size() << std::endl;
 
-int main() {
-	std::list<Shape*> shapes;
-	std::list<Point<double>> intersections;
-	std::ifstream infile("input.txt");
+	std::for_each(intersections.begin(), intersections.end(), 
+		[](const Point<float>& p) {
+			std::cout << p.get_x_coord() << " " << p.get_y_coord() << std::endl; 
+	});
 
-	int shapeCount, x1, y1, x2, y2, radius;
-	char type;
+	// Create a convex hull object and generate the polygon from the intersection points
+	ConvexHull convexHull(intersections);
+	std::vector<Point<float>> hullPoints = convexHull.get_hull_points();
+	std::cout << hullPoints.size() << std::endl;
 
-	infile >> shapeCount;
-
-	for (int i = 0; i < shapeCount; i++) {
-		infile >> type;
-
-		if (type == 'L') {
-			infile >> x1 >> y1 >> x2 >> y2;
-			Shape* line = new Line(x1, y1, x2, y2);
-			std::for_each(shapes.begin(), shapes.end(), [&line, &intersections](const Shape* other) { check_for_intersections(line, other, intersections); });
-			shapes.push_back(line);
-		}
-		else {
-			infile >> x1 >> y1 >> radius;
-			Shape* circle = new Circle(x1, y1, radius);
-			shapes.push_back(circle);
-		}
+	for (auto point : hullPoints) {
+		std::cout << point.get_x_coord() << " " << point.get_y_coord() << std::endl;
 	}
 
-	std::cout << std::fixed << std::setprecision(4);
-	for(auto p : intersections) {
-		std::cout << p.get_x_coord() << " " << p.get_y_coord() << std::endl;
-	}
-
-	std::cin.get();
-}
-
-void check_for_intersections(const Shape* shape, const Shape* other, std::list<Point<double>>& intersections) {
-	if (shape->is_intersecting(other)) {
-		intersections.push_back(shape->get_intersection(other));
-	}
+	std::cout << convexHull.get_area() << std::endl;
 }
